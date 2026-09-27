@@ -12,19 +12,8 @@ const fn round(x:f32)->f32{
   else {-floor(-x+0.5)}
 }
 
-/// Simplified square root.
-#[inline]
-pub const fn sqrt(x:f32)->f32{
-    if x<0.0{return f32::NAN;}if x==0.0||x==f32::INFINITY{return x;}
-    let rcl:u32=x.to_bits();let rcl:f32=f32::from_bits(0x5f375a86-((rcl)>>1));let rcl:f32=rcl*(1.5-(0.5*x*rcl*rcl));let rcl:f32=x*rcl;0.5*(rcl+x/rcl)
-}
-
-/// Simplified inverse square root.
-#[inline]
-pub const fn isqrt(x:f32)->f32{
-    if x<0.0{return f32::NAN;}if x==0.0||x==f32::INFINITY{return 0.0;}
-    let rcl:u32=x.to_bits();let rcl:f32=f32::from_bits(0x5f375a86-((rcl)>>1));let rcl:f32=rcl*(1.5-(0.5*x*rcl*rcl));rcl
-}
+pub mod generic;
+    pub use generic::*;
 
 pub mod constant;
     pub use constant::*;
@@ -32,6 +21,7 @@ pub mod constant;
 pub mod trigonometry;
     pub use trigonometry::*;
 
+/*
 pub mod conversion;
     pub use conversion::*;
     pub use conversion::length::*;
@@ -42,6 +32,7 @@ pub mod conversion;
     pub use conversion::energy::*;
     pub use conversion::time::*;
     pub use conversion::temperature::*;
+*/
 
 pub mod vector;
     pub use vector::*;

@@ -17,17 +17,9 @@ fn test_radians(){
 }
 
 #[test]
-fn test_aliases(){
-    assert_eq!(tan(30.0),tg(30.0));
-    assert_eq!(tanr(0.25),tgr(0.25));
-    assert_eq!(cotan(30.0),ctg(30.0));
-    assert_eq!(cotanr(0.25),ctgr(0.25));
-}
-
-#[test]
 fn test_arcs(){
-    assert_eq!((tan(arctan(0.5))*1000.0).round()/1000.0,(tanr(arctanr(0.5))*1000.0).round()/1000.0);
-    assert_eq!((sin(arcsin(0.2))*1000.0).round()/1000.0,(sinr(arcsinr(0.2))*1000.0).round()/1000.0);
-    assert_eq!((sin(arcsin(-0.6))*1000.0).round()/1000.0,(cos(arccos(-0.6))*1000.0).round()/1000.0);
-    assert_eq!((tanr(arctanr(3.3))*1000.0).round()/1000.0,(cotanr(arccotanr(3.3))*1000.0).round()/1000.0);
+    assert_eq!((tan(atan(0.5))*1000.0).round()/1000.0,(tanr(atanr(0.5))*1000.0).round()/1000.0);
+    assert_eq!((sin(asin(0.2))*1000.0).round()/1000.0,(sinr(asinr(0.2))*1000.0).round()/1000.0);
+    assert_eq!((sin(asin(-0.6))*1000.0).round()/1000.0,(cos(acos(-0.6))*1000.0).round()/1000.0);
+    assert_eq!((tanr(atanr(3.3))*1000.0).round()/1000.0,(cotanr(acotanr(3.3))*1000.0).round()/1000.0);
 }

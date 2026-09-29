@@ -74,29 +74,11 @@ pub const fn tan_int(x:isize)->f32{
     }
 }
 
-/// Simplified tangens function (degrees, 45.0 = 45°).
-#[inline(always)]
-pub const fn tg(x:f32)->f32{
-    tan(x)
-}
-
-/// Simplified tangens function (degrees, 45 = 45°).
-#[inline(always)]
-pub const fn tg_int(x:isize)->f32{
-    tan_int(x)
-}
-
 /// Simplified tangens function (radians, 1.0 = π).
 #[inline]
 pub const fn tanr(x:f32)->f32{
     let x:f32=x-round(x);
     let rcl:f32=x*x;(x*(0.78539816-0.5663706*rcl))/(0.25-rcl)
-}
-
-/// Simplified tangens function (radians, 1.0 = π).
-#[inline(always)]
-pub const fn tgr(x:f32)->f32{
-    tanr(x)
 }
 
 /// Simplified cotangens function (degrees, 45.0 = 45°).
@@ -117,130 +99,64 @@ pub const fn cotan_int(x:isize)->f32{
     }
 }
 
-/// Simplified cotangens function (degrees, 45.0 = 45°).
-#[inline(always)]
-pub const fn ctg(x:f32)->f32{
-    cotan(x)
-}
-
-/// Simplified cotangens function (degrees, 45 = 45°).
-#[inline(always)]
-pub const fn ctg_int(x:isize)->f32{
-    cotan_int(x)
-}
-
 /// Simplified cotangens function (radians, 1.0 = π).
 #[inline]
 pub const fn cotanr(x:f32)->f32{
     -tanr(x+0.5)
 }
 
-/// Simplified cotangens function (radians, 1.0 = π).
-#[inline(always)]
-pub const fn ctgr(x:f32)->f32{
-    cotanr(x)
-}
-
-/// Simplified arc-sinus function (degrees, 45.0 = 45°).
-#[inline]
-pub const fn arcsin(x:f32)->f32{
-    if x<0.0{sqrt(1.0-x)*(90.0+(12.15324+(4.25484+1.07311*x)*x)*x)-90.0}
-    else{90.0-sqrt(1.0-x)*(90.0-(12.15324-(4.25484-1.07311*x)*x)*x)}
-}
-
 /// Simplified arc-sinus function (degrees, 45.0 = 45°).
 #[inline]
 pub const fn asin(x:f32)->f32{
-    arcsin(x)
-}
-
-/// Simplified arc-sinus function (radians, 1.0 = π).
-#[inline]
-pub const fn arcsinr(x:f32)->f32{
-    if x<0.0{sqrt(1.0-x)*(0.5+(0.0675181+(0.0236380+0.0059617*x)*x)*x)-0.5}
-    else{0.5-sqrt(1.0-x)*(0.5-(0.0675181-(0.0236380-0.0059617*x)*x)*x)}
+    if x<0.0{sqrt(1.0-x)*(90.0+(12.15324+(4.25484+1.07311*x)*x)*x)-90.0}
+    else{90.0-sqrt(1.0-x)*(90.0-(12.15324-(4.25484-1.07311*x)*x)*x)}
 }
 
 /// Simplified arc-sinus function (radians, 1.0 = π).
 #[inline]
 pub const fn asinr(x:f32)->f32{
-    arcsinr(x)
-}
-
-/// Simplified arc-cosinus function (degrees, 45.0 = 45°).
-#[inline]
-pub const fn arccos(x:f32)->f32{
-    90.0-arcsin(x)
+    if x<0.0{sqrt(1.0-x)*(0.5+(0.0675181+(0.0236380+0.0059617*x)*x)*x)-0.5}
+    else{0.5-sqrt(1.0-x)*(0.5-(0.0675181-(0.0236380-0.0059617*x)*x)*x)}
 }
 
 /// Simplified arc-cosinus function (degrees, 45.0 = 45°).
 #[inline]
 pub const fn acos(x:f32)->f32{
-    arccos(x)
-}
-
-/// Simplified arc-cosinus function (radians, 1.0 = π).
-#[inline]
-pub const fn arccosr(x:f32)->f32{
-    0.5-arcsinr(x)
+    90.0-asin(x)
 }
 
 /// Simplified arc-cosinus function (radians, 1.0 = π).
 #[inline]
 pub const fn acosr(x:f32)->f32{
-    arccosr(x)
+    0.5-asinr(x)
 }
 
 /// Simplified arc-tangens function (degrees, 45.0 = 45°).
 #[inline]
-pub const fn arctan(x:f32)->f32{
+pub const fn atan(x:f32)->f32{
     if x>0.0&&x<2.0{let x:f32=1.3*x;let rcl:f32=x-2.0;(x/(x+1.0))*(90.0-(rcl*rcl*10.0))}
     else if x>0.0{90.0-90.0/(1.3*x+1.0)}
     else if x>-2.0{let x:f32=-1.3*x;let rcl:f32=2.0-x;-(x/(x+1.0))*(90.0-(rcl*rcl*10.0))}
     else{90.0/(-1.3*x+1.0)-90.0}
 }
 
-/// Simplified arc-tangens function (degrees, 45.0 = 45°).
-#[inline]
-pub const fn atan(x:f32)->f32{
-    arctan(x)
-}
-
 /// Simplified arc-tangens function (radians, 1.0 = π).
 #[inline]
-pub const fn arctanr(x:f32)->f32{
+pub const fn atanr(x:f32)->f32{
     if x>0.0&&x<2.0{let x:f32=1.3*x;let rcl:f32=x-2.0;(x/(x+1.0))*(0.5-(rcl*rcl*0.055555556))}
     else if x>0.0{0.5-0.5/(1.3*x+1.0)}
     else if x>-2.0{let x:f32=-1.3*x;let rcl:f32=2.0-x;-(x/(x+1.0))*(0.5-(rcl*rcl*0.055555556))}
     else{1.0/(-2.6*x+2.0)-0.5}
 }
 
-/// Simplified arc-tangens function (radians, 1.0 = π).
-#[inline]
-pub const fn atanr(x:f32)->f32{
-    arctanr(x)
-}
-
-/// Simplified arc-cotangens function (degrees, 45.0 = 45°).
-#[inline]
-pub const fn arccotan(x:f32)->f32{
-    90.0-arctan(x)
-}
-
 /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
 #[inline]
 pub const fn acotan(x:f32)->f32{
-    arccotan(x)
-}
-
-/// Simplified arc-cotangens function (degrees, 45.0 = 45°).
-#[inline]
-pub const fn arccotanr(x:f32)->f32{
-    0.5-arctanr(x)
+    90.0-atan(x)
 }
 
 /// Simplified arc-cotangens function (degrees, 45.0 = 45°).
 #[inline]
 pub const fn acotanr(x:f32)->f32{
-    arccotanr(x)
+    0.5-atanr(x)
 }

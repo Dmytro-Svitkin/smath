@@ -22,12 +22,12 @@ fn int_trig_values(){
         println!("█ tan({}.0)   = {}",a as f32,tan(a as f32));
         println!("█ tan({})     = {}",a,tan_int(a));
         println!("█");
-        assert_eq!(((tan(a as f32)*10.0).round())*0.1,((tg_int(a)*10.0).round())*0.1);
+        assert_eq!(((tan(a as f32)*10.0).round())*0.1,((tan_int(a)*10.0).round())*0.1);
 
         println!("█ cotan({}.0) = {}",a as f32,cotan(a as f32));
         println!("█ cotan({})   = {}",a,cotan_int(a));
     
-        assert_eq!(((ctg(a as f32)*10.0).round())*0.1,((cotan_int(a)*10.0).round())*0.1);
+        assert_eq!(((cotan(a as f32)*10.0).round())*0.1,((cotan_int(a)*10.0).round())*0.1);
     }
     println!("")
 }

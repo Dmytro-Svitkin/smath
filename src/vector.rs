@@ -1,6 +1,6 @@
 use core::ops::{Add,AddAssign,Div,DivAssign,Mul,MulAssign,Neg,Sub,SubAssign};
 use super::{sqrt,isqrt};
-use super::{sin,cos,sinr,cosr,arctan,arctanr};
+use super::{sin,cos,sinr,cosr,atan,atanr};
 
 /// A 2D vector representing spatial coordinates (x, y).
 #[derive(Debug,Copy,Clone,Default)]
@@ -159,7 +159,7 @@ impl Vec2{
                 else{0.0}
             }
             else{
-                let rcl:f32=arctan(self.y/self.x);
+                let rcl:f32=atan(self.y/self.x);
                 if self.x<0.0{if self.y>=0.0{rcl+180.0}else{rcl-180.0}}
                 else{rcl}
             }
@@ -180,7 +180,7 @@ impl Vec2{
                 else{0.0}
             }
             else{
-                let rcl:f32=arctanr(self.y/self.x);
+                let rcl:f32=atanr(self.y/self.x);
                 if self.x<0.0{if self.y>=0.0{rcl+1.0}else{rcl-1.0}}
                 else{rcl}
             }

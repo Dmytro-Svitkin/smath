@@ -10,7 +10,13 @@
 | **Name** | **Function** | **Input** | **Output** |
 | --- | --- | --- | --- |
 | Round | `round` | `f32` | `f32` |
-| Floor | `floor` | `f32` | `f32` |
+| Round leaving decimal digits | `round` | `f32` | `f32` |
+| Trunc | `trunc` | `f32` | `f32` |
+| Trunc leaving decimal digits | `trunc_digits` | `f32` | `f32` |
+| Euclidean Floor | `floor`, | `f32` | `f32` |
+| Euclidean Floor leaving decimal digits| `floor_digits`, | `f32` | `f32` |
+| Euclidian Celling | `celling` | `f32` | `f32` |
+| Euclidian Celling leaving decimal digits | `celling_digits` | `f32` | `f32` |
 | Absolute Value | `abs` | `f32` | `f32` |
 | Factorial | `factorial` | `u32` | `u32` |
 | Prime Number Check | `is_prime` | `u32` | `bool` |
@@ -20,7 +26,9 @@
 | Least Common Multiple | `lcm` | `&[u32]` | `u32` |
 | Arithmetic Mean or Arithmetic Average | `arithmetic_mean`/`arithmetic_average` | `&[f32]` | `f32` |
 
-``
+```
+// Example Usage
+```
 
 ### Trigonometry (`smath::trigonometry`)
 To input an angle in degrees, enter the numeric value - for example, `45.0`.  

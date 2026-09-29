@@ -79,17 +79,12 @@ pub const fn gcd(x:&[u32])->u32{
     result
 }
 
-#[inline(always)]
-const fn arithmetic_average_2(a:f32,b:f32)->f32{
-    a+(b-a)/2.0
-}
-
 #[inline]
 pub const fn arithmetic_average(x:&[f32])->f32{
     let x_len:usize=x.len();
     if x_len==0{return 0.0}
-    let mut result:f32=x[0];
+    let mut result:f32=0.0;
     let mut counter:usize=0;
-    while counter<x_len{result=arithmetic_average_2(result,x[counter]);counter+=1}
+    while counter<x_len{counter+=1;result+=(x[counter-1]-result)/(counter as f32)}
     return result
 }

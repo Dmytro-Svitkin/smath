@@ -20,7 +20,8 @@ pub const fn floor(value:f32)->f32{
 /// Returns the greatest whole number equal or less than the given number and decimal digits.
 #[inline(always)]
 pub const fn floor_digits(value:f32,digits:usize)->f32{
-    floor(value*pow10(digits)as f32)
+    let pow_10:f32=pow10(digits)as f32;
+    floor(value*pow_10)/pow_10
 }
 
 /// Euclidean celling function.
@@ -37,7 +38,8 @@ pub const fn celling(value:f32)->f32{
 /// Returns the least whole number equal or less than the given number and decimal digits.
 #[inline(always)]
 pub const fn celling_digits(value:f32,digits:usize)->f32{
-    celling(value*pow10(digits)as f32)
+    let pow_10:f32=pow10(digits)as f32;
+    celling(value*pow_10)/pow_10
 }
 
 ///Trunc function.
@@ -53,7 +55,8 @@ pub const fn trunc(value:f32)->f32{
 /// Returns the whole part and decimal digits.
 #[inline(always)]
 pub const fn trunc_digits(value:f32,digits:usize)->f32{
-    trunc(value*pow10(digits)as f32)
+    let pow_10:f32=pow10(digits)as f32;
+    trunc(value*pow_10)/pow_10
 }
 
 /// Round function.
@@ -70,7 +73,8 @@ pub const fn round(value:f32)->f32{
 /// 
 #[inline(always)]
 pub const fn round_digits(value:f32,digits:usize)->f32{
-    round(value*pow10(digits)as f32)
+    let pow_10:f32=pow10(digits)as f32;
+    round(value*pow_10)/pow_10
 }
 
 /// Simplified square root.

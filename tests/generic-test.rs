@@ -43,7 +43,7 @@ fn test_lcm(){
 }
 
 #[test]
-fn test_round_floor_celling(){
+fn test_floor_celling_trunc_round(){
     assert_eq!(round(-0.0),0.0);
     assert_eq!(round(2.0),2.0);
     assert_eq!(round(505.23),505.0);
@@ -66,6 +66,15 @@ fn test_round_floor_celling(){
     assert_eq!(celling(3.0001),4.0);
     assert_eq!(celling(-20.05),-20.0);
     assert_eq!(celling(-30.99),-30.0);
+
+    assert_eq!(floor_digits(2.13,1),2.1);
+    assert_eq!(floor_digits(5.777,2),5.77);
+    assert_eq!(celling_digits(2.13,1),2.2);
+    assert_eq!(celling_digits(5.777,2),5.78);
+    assert_eq!(round_digits(2.13,1),2.1);
+    assert_eq!(round_digits(5.777,2),5.78);
+    assert_eq!(trunc_digits(2.13,1),2.1);
+    assert_eq!(trunc_digits(5.777,2),5.77)
 }
 
 #[test]

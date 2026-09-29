@@ -10,7 +10,7 @@
 | **Name** | **Function** | **Input** | **Output** |
 | --- | --- | --- | --- |
 | Round | `round` | `f32` | `f32` |
-| Round leaving decimal digits | `round` | `f32` | `f32` |
+| Round leaving decimal digits | `round_digits` | `f32` | `f32` |
 | Trunc | `trunc` | `f32` | `f32` |
 | Trunc leaving decimal digits | `trunc_digits` | `f32` | `f32` |
 | Euclidean Floor | `floor`, | `f32` | `f32` |
@@ -26,8 +26,14 @@
 | Least Common Multiple | `lcm` | `&[u32]` | `u32` |
 | Arithmetic Mean or Arithmetic Average | `arithmetic_mean`/`arithmetic_average` | `&[f32]` | `f32` |
 
-```
+```rust
 // Example Usage
+const a: [u32; 3] = [round(12.5) as u32, 20, 6]; // [13, 20, 6].
+let com_mul = lcm(&a); // 720 is the least common multiple here.
+const root = floor_digit(sqrt(com_mul as f32),2); // 27.92.
+if !is_prime(684){ // Returns true, baceuse 684 is not a prime number.
+    println!("{}",gcd(&[6, 8, 4])) // Prints 2.
+}
 ```
 
 ### Trigonometry (`smath::trigonometry`)

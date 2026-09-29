@@ -80,11 +80,16 @@ pub const fn gcd(x:&[u32])->u32{
 }
 
 #[inline]
-pub const fn arithmetic_average(x:&[f32])->f32{
+pub const fn arithmetic_mean(x:&[f32])->f32{
     let x_len:usize=x.len();
     if x_len==0{return 0.0}
     let mut result:f32=0.0;
     let mut counter:usize=0;
     while counter<x_len{counter+=1;result+=(x[counter-1]-result)/(counter as f32)}
     return result
+}
+
+#[inline]
+pub const fn arithmetic_average(x:&[f32])->f32{// Alias for arithmetic_mean
+    arithmetic_mean(x)
 }

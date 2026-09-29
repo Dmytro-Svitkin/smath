@@ -1,13 +1,26 @@
 # smath
 
-`smath` (Simple Math or Simplified Math) is a lightweight, highly optimized Rust mathematical library designed for performance-critical applications. It provides fast, low-overhead implementations of essential mathematical operations with a primary focus on minimizing instruction counts and avoiding expensive operations.
+`smath` (Simple Math, Simplified Math or Small Math) is a lightweight, highly optimized Rust mathematical library designed for performance-critical applications. It provides fast, low-overhead implementations of essential mathematical operations with a primary focus on minimizing instruction counts and avoiding expensive operations.
 
 `smath` features *zero* dependencies and is suitable for `no_std` environments.
 
 ## Modules
 
-### Generic Mathematics
+### Generic Mathematics (`smath::generic`)
+| **Name** | **Function** | **Input** | **Output** |
+| --- | --- | --- | --- |
+| Round | `round` | `f32` | `f32` |
+| Floor | `floor` | `f32` | `f32` |
+| Absolute Value | `abs` | `f32` | `f32` |
+| Factorial | `factorial` | `u32` | `u32` |
+| Prime Number Check | `is_prime` | `u32` | `bool` |
+| Square Root | `sqrt` | `f32` | `f32` |
+| Inverted Square Root | `isqrt` | `f32` | `f32` |
+| Greatest Common Divider | `gcd` | `&[u32]` | `u32` |
+| Least Common Multiple | `lcm` | `&[u32]` | `u32` |
+| Arithmetic Mean or Arithmetic Average | `arithmetic_mean`/`arithmetic_average` | `&[f32]` | `f32` |
 
+``
 
 ### Trigonometry (`smath::trigonometry`)
 To input an angle in degrees, enter the numeric value - for example, `45.0`.  
@@ -23,7 +36,7 @@ To input an angle in degrees, enter the numeric value - for example, `45.0`.
 | Arc-Tangens | `atan` | `f32` | Degrees `f32` |
 | Arc-Cotangens | `acotan` | `f32` | Degrees `f32` |
 
-To input an angle in degrees using `isize`, enter the numeric value — for example, `45` (for 45°).
+To input an angle in degrees using `isize`, enter the numeric value - for example, `45` (for 45°).
 <sub>`isize` inputs are faster and more precise than `f32` values because they use lookup tables.</sub>
 
 | **Name** | **Function** | **Input** | **Output** |
@@ -56,7 +69,6 @@ let sinus_deg = sin(67.5);   // Sinus of a 67.5° angle
 ```
 
 ### Constants (`smath::constant`)
-
 | **Name** | **Category** | **Rust Type** | **Description** |
 | --- | --- | --- | --- |
 | `SIN` | Trigonometric | `[f32; 91]` | Sinus values for 0°-90° |
@@ -96,7 +108,7 @@ let flat_vel = velocity.flat(); // velocity is flattened to {0.0, 2.0}
 ```
 
 ## Martices (`smath::matrix`)
-Matrix types (`Mat3`, `Mat4`, and generic `Mat<ROW, COL>`) providing const‑generic, column‑major storage with full arithmetic and transformation support.
+Matrix types (`Mat3`, `Mat4`, and generic `Mat<ROW, COL>`) providing const‑generic, *column‑major* storage with full arithmetic and transformation support.
 
 | **Category** | **Methods** | **Description** |
 | --- | --- | --- |
@@ -125,7 +137,7 @@ Add `smath` to your `Cargo.toml` dependencies:
 
 ```toml
 [dependencies]
-smath = "0.4.1"
+smath = "0.5.0"
 ```
 
 <sub>This project is licensed under the BSD 3-Clause License.</sub>

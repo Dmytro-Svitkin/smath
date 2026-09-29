@@ -28,7 +28,22 @@ fn test_gcd(){
 }
 
 #[test]
-fn test_round_floor(){
+fn test_lcm(){
+    assert_eq!(lcm(&[]),0);
+    assert_eq!(lcm(&[0,0]),0);
+    assert_eq!(lcm(&[0,0,0]),0);
+    assert_eq!(lcm(&[0,3]),0);
+    assert_eq!(lcm(&[0,3,6]),0);
+
+    assert_eq!(lcm(&[1]),1);
+    assert_eq!(lcm(&[1,2]),2);
+    assert_eq!(lcm(&[2,4]),4);
+    assert_eq!(lcm(&[4,5,2]),20);
+    assert_eq!(lcm(&[199,199]),199);
+}
+
+#[test]
+fn test_round_floor_celling(){
     assert_eq!(round(-0.0),0.0);
     assert_eq!(round(2.0),2.0);
     assert_eq!(round(505.23),505.0);
@@ -44,12 +59,19 @@ fn test_round_floor(){
     assert_eq!(floor(-0.3),-1.0);
     assert_eq!(floor(-19.001),-20.0);
     assert_eq!(floor(-21.777),-22.0);
+
+    assert_eq!(celling(0.0),0.0);
+    assert_eq!(celling(1.1),2.0);
+    assert_eq!(celling(4.7),5.0);
+    assert_eq!(celling(3.0001),4.0);
+    assert_eq!(celling(-20.05),-20.0);
+    assert_eq!(celling(-30.99),-30.0);
 }
 
 #[test]
 fn test_sqrt(){
     use core::f32::consts::SQRT_2;
-    
+
     assert!(sqrt(0.0)<0.001&&sqrt(0.0)>-0.001);
     assert!(sqrt(1.0)<1.001&&sqrt(1.0)>0.999);
     assert!(sqrt(4.0)<2.001&&sqrt(4.0)>1.999);
@@ -59,4 +81,19 @@ fn test_sqrt(){
 
     assert!(sqrt(-1.0).is_nan());
     assert!(sqrt(-105.0).is_nan());
+}
+
+#[test]
+fn test_prime(){
+    assert!(is_prime(1));
+    assert!(is_prime(2));
+    assert!(is_prime(3));
+    assert!(is_prime(5));
+    assert!(is_prime(7));
+
+    assert!(!is_prime(4));
+    assert!(!is_prime(6));
+    assert!(!is_prime(27));
+    assert!(!is_prime(123));
+    assert!(!is_prime(12345678));
 }

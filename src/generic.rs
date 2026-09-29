@@ -48,27 +48,48 @@ pub const fn is_prime(x:u32)->bool{
 }
 
 #[inline(always)]
-const fn gcd_two(mut a:u32,mut b:u32)->u32{
+const fn gcd_2(mut a:u32,mut b:u32)->u32{
     while b!=0{
         let rcl:u32=b;
         b=a%b;
         a=rcl;
     }
+
+    if a==0{return 1}
     a
 }
 
 #[inline]
 pub const fn gcd(x:&[u32])->u32{
-    if x.len()==2{}
+    let x_len:usize=x.len();
 
+    if x_len==0{return 1}
+    else if x_len==1{if x[0]==0{return 1}return x[0]}
+    else if x_len==2{return gcd_2(x[0],x[1])}
+    
     let mut result:u32=0;
     let mut counter:usize=0;
 
-    while counter<x.len(){
-        result=gcd_two(result,x[counter]);
+    while counter<x_len{
+        result=gcd_2(result,x[counter]);
         if result==1{return 1}
         counter+=1
     }
 
     result
+}
+
+#[inline(always)]
+const fn arithmetic_average_2(a:f32,b:f32)->f32{
+    a+(b-a)/2.0
+}
+
+#[inline]
+pub const fn arithmetic_average(x:&[f32])->f32{
+    let x_len:usize=x.len();
+    if x_len==0{return 0.0}
+    let mut result:f32=x[0];
+    let mut counter:usize=0;
+    while counter<x_len{result=arithmetic_average_2(result,x[counter]);counter+=1}
+    return result
 }

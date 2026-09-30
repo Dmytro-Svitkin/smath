@@ -27,33 +27,33 @@ impl Vec2{
 
         /// Sets the vector's components to the given values.
         #[inline]
-        pub fn set(&mut self,x:f32,y:f32){
+        pub const fn set(&mut self,x:f32,y:f32){
             self.x=x;
             self.y=y
         }
 
         /// Shifts the vector's components by the given values.
         #[inline]
-        pub fn shift(&mut self,x:f32,y:f32){
+        pub const fn shift(&mut self,x:f32,y:f32){
             self.x+=x;
             self.y+=y
         }
 
         /// Calculates the length (magnitude) of the vector.
         #[inline]
-        pub fn length(&self)->f32{
+        pub const fn length(&self)->f32{
             sqrt(self.sq_length())
         }
 
         /// Calculates the squared length of the vector.
         #[inline(always)]
-        pub fn sq_length(&self)->f32{
+        pub const fn sq_length(&self)->f32{
             self.x*self.x+self.y*self.y
         }
 
         /// Normalizes the vector in place.
         #[inline]
-        pub fn normalize(&mut self){
+        pub const fn normalize(&mut self){
             let rcl:f32=self.sq_length();
             if rcl!=0.0{
                 let rcl:f32=isqrt(rcl);
@@ -64,25 +64,25 @@ impl Vec2{
 
         /// Returns a new normalized vector.
         #[inline]
-        pub fn normalized(&self)->Self{
+        pub const fn normalized(&self)->Self{
             let mut rcl:Vec2=*self;rcl.normalize();rcl
         }
 
         /// Calculates the dot product of two vectors.
         #[inline(always)]
-        pub fn dot(&self,other:Self)->f32{
+        pub const fn dot(&self,other:Self)->f32{
             self.x*other.x+self.y*other.y
         }
 
         /// Calculates the distance between two vectors.
         #[inline]
-        pub fn distance(&self,other:Self)->f32{
+        pub const fn distance(&self,other:Self)->f32{
             sqrt(self.sq_distance(other))
         }
 
         /// Calculates the squared distance between two vectors.
         #[inline(always)]
-        pub fn sq_distance(&self,other:Self)->f32{
+        pub const fn sq_distance(&self,other:Self)->f32{
             let dx:f32=self.x-other.x;
             let dy:f32=self.y-other.y;
             dx*dx+dy*dy
@@ -90,7 +90,7 @@ impl Vec2{
 
         /// Linearly interpolates between this vector and another by a factor of t.
         #[inline]
-        pub fn lerp(&self,other:Self,t:f32)->Self{
+        pub const fn lerp(&self,other:Self,t:f32)->Self{
             Self::new(
                 self.x+(other.x-self.x)*t,
                 self.y+(other.y-self.y)*t
@@ -99,7 +99,7 @@ impl Vec2{
 
         /// Clamps the vector components between a minimum and maximum bounding vector.
         #[inline]
-        pub fn clamp(&self,min:Self,max:Self)->Self{
+        pub const fn clamp(&self,min:Self,max:Self)->Self{
             Self::new(
                 if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
                 if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y}
@@ -108,7 +108,7 @@ impl Vec2{
 
         /// Returns a vector containing the absolute value of each component.
         #[inline]
-        pub fn abs(&self)->Self{
+        pub const fn abs(&self)->Self{
             Self::new(
                 if self.x<0.0{-self.x}else{self.x},
                 if self.y<0.0{-self.y}else{self.y}
@@ -117,7 +117,7 @@ impl Vec2{
 
         /// Finds the midpoint between this vector and another.
         #[inline]
-        pub fn midpoint(&self,other:Self)->Self{
+        pub const fn midpoint(&self,other:Self)->Self{
             Self::new(
                 (self.x+other.x)*0.5,
                 (self.y+other.y)*0.5
@@ -146,13 +146,13 @@ impl Vec2{
 
         /// Returns a vector perpendicular to this one, rotated 90 degrees counter-clockwise.
         #[inline(always)]
-        pub fn perp(&self)->Self{
+        pub const fn perp(&self)->Self{
             Self::new(-self.y,self.x)
         }
 
         /// Calculates the angle of the vector in degrees relative to the positive X-axis.
         #[inline]
-        pub fn angle(&self)->f32{
+        pub const fn angle(&self)->f32{
             if self.x==0.0{
                 if self.y>0.0{90.0}
                 else if self.y<0.0{-90.0}
@@ -167,13 +167,13 @@ impl Vec2{
 
         /// Calculates the angle of the vector in degrees relative to the positive X-axis.
         #[inline(always)]
-        pub fn angle_deg(&self)->f32{
+        pub const fn angle_deg(&self)->f32{
             self.angle()
         }
 
         /// Calculates the angle of the vector in pi-radians relative to the positive X-axis.
         #[inline]
-        pub fn angler(&self)->f32{
+        pub const fn angler(&self)->f32{
             if self.x==0.0{
                 if self.y>0.0{0.5}
                 else if self.y<0.0{-0.5}
@@ -188,13 +188,13 @@ impl Vec2{
 
         /// Calculates the angle of the vector in pi-radians relative to the positive X-axis.
         #[inline]
-        pub fn angle_rad(&self)->f32{
+        pub const fn angle_rad(&self)->f32{
             self.angler()
         }
 
         /// Rotates the 2D vector by a given angle (degrees, 45.0 = 45°).
         #[inline]
-        pub fn rotate(&self,angle:f32)->Self{
+        pub const fn rotate(&self,angle:f32)->Self{
             let s:f32=sin(angle);
             let c:f32=cos(angle);
             Self::new(self.x*c-self.y*s,self.x*s+self.y*c)
@@ -202,7 +202,7 @@ impl Vec2{
 
         /// Rotates the 2D vector by a given angle (radians, 1.0 = π).
         #[inline]
-        pub fn rotater(&self,angle:f32)->Self{
+        pub const fn rotater(&self,angle:f32)->Self{
             let s:f32=sinr(angle);
             let c:f32=cosr(angle);
             Self::new(self.x*c-self.y*s,self.x*s+self.y*c)
@@ -210,13 +210,13 @@ impl Vec2{
 
         /// Rotates the 2D vector by a given angle (degrees, 45.0 = 45°).
         #[inline]
-        pub fn rotate_deg(&self,angle:f32)->Self{
+        pub const fn rotate_deg(&self,angle:f32)->Self{
             self.rotate(angle)
         }
 
         /// Rotates the 2D vector by a given angle (radians, 1.0 = π).
         #[inline]
-        pub fn rotate_rad(&self,angle:f32)->Self{
+        pub const fn rotate_rad(&self,angle:f32)->Self{
             self.rotater(angle)
         }
     }
@@ -349,7 +349,7 @@ impl Vec3{
 
         /// Sets the vector's components to the given values.
         #[inline]
-        pub fn set(&mut self,x:f32,y:f32,z:f32){
+        pub const fn set(&mut self,x:f32,y:f32,z:f32){
             self.x=x;
             self.y=y;
             self.z=z
@@ -357,7 +357,7 @@ impl Vec3{
 
         /// Shifts the vector's components by the given values.
         #[inline]
-        pub fn shift(&mut self,x:f32,y:f32,z:f32){
+        pub const fn shift(&mut self,x:f32,y:f32,z:f32){
             self.x+=x;
             self.y+=y;
             self.z+=z
@@ -365,19 +365,19 @@ impl Vec3{
 
         /// Calculates the length (magnitude) of the vector.
         #[inline]
-        pub fn length(&self)->f32{
+        pub const fn length(&self)->f32{
             sqrt(self.sq_length())
         }
 
         /// Calculates the squared length of the vector.
         #[inline(always)]
-        pub fn sq_length(&self)->f32{
+        pub const fn sq_length(&self)->f32{
             self.x*self.x+self.y*self.y+self.z*self.z
         }
 
         /// Normalizes the vector in place.
         #[inline]
-        pub fn normalize(&mut self){
+        pub const fn normalize(&mut self){
             let rcl:f32=self.sq_length();
             if rcl!=0.0{
                 let rcl:f32=isqrt(rcl);
@@ -389,25 +389,25 @@ impl Vec3{
 
         /// Returns a new normalized vector.
         #[inline]
-        pub fn normalized(&self)->Self{
+        pub const fn normalized(&self)->Self{
             let mut rcl:Vec3=*self;rcl.normalize();rcl
         }
 
         /// Calculates the dot product of two vectors.
         #[inline(always)]
-        pub fn dot(&self,other:Self)->f32{
+        pub const fn dot(&self,other:Self)->f32{
             self.x*other.x+self.y*other.y+self.z*other.z
         }
 
         /// Calculates the distance between two vectors.
         #[inline]
-        pub fn distance(&self,other:Self)->f32{
+        pub const fn distance(&self,other:Self)->f32{
             sqrt(self.sq_distance(other))
         }
 
         /// Calculates the squared distance between two vectors.
         #[inline(always)]
-        pub fn sq_distance(&self,other:Self)->f32{
+        pub const fn sq_distance(&self,other:Self)->f32{
             let dx:f32=self.x-other.x;
             let dy:f32=self.y-other.y;
             let dz:f32=self.z-other.z;
@@ -416,7 +416,7 @@ impl Vec3{
 
         /// Linearly interpolates between this vector and another by a factor of t.
         #[inline]
-        pub fn lerp(&self,other:Self,t:f32)->Self{
+        pub const fn lerp(&self,other:Self,t:f32)->Self{
             Self::new(
                 self.x+(other.x-self.x)*t,
                 self.y+(other.y-self.y)*t,
@@ -426,7 +426,7 @@ impl Vec3{
 
         /// Clamps the vector components between a minimum and maximum bounding vector.
         #[inline]
-        pub fn clamp(&self,min:Self,max:Self)->Self{
+        pub const fn clamp(&self,min:Self,max:Self)->Self{
             Self::new(
                 if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
                 if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y},
@@ -436,7 +436,7 @@ impl Vec3{
 
         /// Returns a vector containing the absolute value of each component.
         #[inline]
-        pub fn abs(&self)->Self{
+        pub const fn abs(&self)->Self{
             Self::new(
                 if self.x<0.0{-self.x}else{self.x},
                 if self.y<0.0{-self.y}else{self.y},
@@ -446,7 +446,7 @@ impl Vec3{
 
         /// Finds the midpoint between this vector and another.
         #[inline]
-        pub fn midpoint(&self,other:Self)->Self{
+        pub const fn midpoint(&self,other:Self)->Self{
             Self::new(
                 (self.x+other.x)*0.5,
                 (self.y+other.y)*0.5,
@@ -476,7 +476,7 @@ impl Vec3{
 
         /// Calculates the cross product of two vectors.
         #[inline]
-        pub fn cross(&self,other:Self)->Self{
+        pub const fn cross(&self,other:Self)->Self{
             Self::new(
                 self.y*other.z-self.z*other.y,
                 self.z*other.x-self.x*other.z,
@@ -486,13 +486,13 @@ impl Vec3{
 
         /// Flattens the 3D vector by discarding the Z-axis (orthographic projection).
         #[inline]
-        pub fn flat(&self)->Vec2{
+        pub const fn flat(&self)->Vec2{
             Vec2::new(self.x,self.y)
         }
 
         /// Flattens the 3D vector onto the 2D XY plane, scaling the horizontal components based on the vertical Z tilt.
         #[inline]
-        pub fn sp_flat(&self)->Vec2{
+        pub const fn sp_flat(&self)->Vec2{
             let rcl:f32=self.sq_length();
             let z_sq:f32=self.z*self.z;
             if z_sq>=rcl{Vec2::zero()}
@@ -501,7 +501,7 @@ impl Vec3{
 
         /// Flattens the vector by dividing X and Y by Z (perspective projection).
         #[inline]
-        pub fn persp(&self)->Vec2{
+        pub const fn persp(&self)->Vec2{
             if self.z==0.0{Vec2::zero()}
             else{Vec2::new(self.x/self.z,self.y/self.z)}
         }
@@ -642,7 +642,7 @@ impl Vec4{
 
         /// Sets the vector's components to the given values.
         #[inline]
-        pub fn set(&mut self,x:f32,y:f32,z:f32,w:f32){
+        pub const fn set(&mut self,x:f32,y:f32,z:f32,w:f32){
             self.x=x;
             self.y=y;
             self.z=z;
@@ -651,7 +651,7 @@ impl Vec4{
 
         /// Shifts the vector's components by the given values.
         #[inline]
-        pub fn shift(&mut self,x:f32,y:f32,z:f32,w:f32){
+        pub const fn shift(&mut self,x:f32,y:f32,z:f32,w:f32){
             self.x+=x;
             self.y+=y;
             self.z+=z;
@@ -660,19 +660,19 @@ impl Vec4{
 
         /// Calculates the length (magnitude) of the vector.
         #[inline]
-        pub fn length(&self)->f32{
+        pub const fn length(&self)->f32{
             sqrt(self.sq_length())
         }
 
         /// Calculates the squared length of the vector.
         #[inline(always)]
-        pub fn sq_length(&self)->f32{
+        pub const fn sq_length(&self)->f32{
             self.x*self.x+self.y*self.y+self.z*self.z+self.w*self.w
         }
 
         /// Normalizes the vector in place.
         #[inline]
-        pub fn normalize(&mut self){
+        pub const fn normalize(&mut self){
             let rcl:f32=self.sq_length();
             if rcl!=0.0{
                 let rcl:f32=isqrt(rcl);
@@ -685,25 +685,25 @@ impl Vec4{
 
         /// Returns a new normalized vector.
         #[inline]
-        pub fn normalized(&self)->Self{
+        pub const fn normalized(&self)->Self{
             let mut rcl:Vec4=*self;rcl.normalize();rcl
         }
 
         /// Calculates the dot product of two vectors.
         #[inline(always)]
-        pub fn dot(&self,other:Self)->f32{
+        pub const fn dot(&self,other:Self)->f32{
             self.x*other.x+self.y*other.y+self.z*other.z+self.w*other.w
         }
 
         /// Calculates the distance between two vectors.
         #[inline]
-        pub fn distance(&self,other:Self)->f32{
+        pub const fn distance(&self,other:Self)->f32{
             sqrt(self.sq_distance(other))
         }
 
         /// Calculates the squared distance between two vectors.
         #[inline(always)]
-        pub fn sq_distance(&self,other:Self)->f32{
+        pub const fn sq_distance(&self,other:Self)->f32{
             let dx:f32=self.x-other.x;
             let dy:f32=self.y-other.y;
             let dz:f32=self.z-other.z;
@@ -713,7 +713,7 @@ impl Vec4{
 
         /// Linearly interpolates between this vector and another by a factor of t.
         #[inline]
-        pub fn lerp(&self,other:Self,t:f32)->Self{
+        pub const fn lerp(&self,other:Self,t:f32)->Self{
             Self::new(
                 self.x+(other.x-self.x)*t,
                 self.y+(other.y-self.y)*t,
@@ -724,7 +724,7 @@ impl Vec4{
 
         /// Clamps the vector components between a minimum and maximum bounding vector.
         #[inline]
-        pub fn clamp(&self,min:Self,max:Self)->Self{
+        pub const fn clamp(&self,min:Self,max:Self)->Self{
             Self::new(
                 if self.x<min.x{min.x}else if self.x>max.x{max.x}else{self.x},
                 if self.y<min.y{min.y}else if self.y>max.y{max.y}else{self.y},
@@ -735,7 +735,7 @@ impl Vec4{
 
         /// Returns a vector containing the absolute value of each component.
         #[inline]
-        pub fn abs(&self)->Self{
+        pub const fn abs(&self)->Self{
             Self::new(
                 if self.x<0.0{-self.x}else{self.x},
                 if self.y<0.0{-self.y}else{self.y},
@@ -746,7 +746,7 @@ impl Vec4{
 
         /// Finds the midpoint between this vector and another.
         #[inline]
-        pub fn midpoint(&self,other:Self)->Self{
+        pub const fn midpoint(&self,other:Self)->Self{
             Self::new(
                 (self.x+other.x)*0.5,
                 (self.y+other.y)*0.5,

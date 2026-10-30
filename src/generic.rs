@@ -6,6 +6,11 @@ const fn pow10(exponent:usize)->u32{
     result
 }
 
+#[inline(always)]
+pub const fn is_whole(value:f32)->bool{
+    value==value as u32 as f32
+}
+
 /// Euclidean floor function.
 ///
 /// Returns the greatest whole number equal or less than the given number.

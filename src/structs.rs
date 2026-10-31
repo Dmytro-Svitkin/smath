@@ -37,6 +37,10 @@ impl<T:Copy>Value<T>{
         self.value_unwrapped_or(type_zero)
     }
     */
+
+    pub const fn to_scaled_angle(&self)->Angle<T>{
+        Angle::from_scaled(self.value())
+    }
 }
 
 pub struct Angle<T:Copy>{
@@ -71,5 +75,9 @@ impl<T:Copy>Angle<T>{
 
     pub fn scaled_angle_unwrapped_or_else<F:FnOnce()->T>(&self,or_else:F)->T{
         self.scaled_angle().unwrap_or_else(or_else)
+    }
+
+    pub const fn to_value_scaled(&self)->Value<T>{
+        Value::from(self.scaled_angle())
     }
 }
